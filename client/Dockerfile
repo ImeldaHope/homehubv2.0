@@ -22,8 +22,11 @@ FROM nginx:alpine
 # Step 8: Copy the built files to the Nginx server
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Step 9: Expose the port the app will run on (default Vite port is 5173)
+# Step 9: Copy custom Nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Step 10: Expose the port the app will run on (default Vite port is 5173)
 EXPOSE 5173
 
-# Step 10: Start the Nginx server
+# Step 11: Start the Nginx server
 CMD ["nginx", "-g", "daemon off;"]
